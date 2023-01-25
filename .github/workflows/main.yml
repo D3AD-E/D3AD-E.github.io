@@ -18,8 +18,8 @@ jobs:
 
     - name: Publish .NET Core Project
       run: dotnet publish D3ADWebsite.csproj -c Release -o release --nologo
-    
-    - name: Change base-tag in index.html from / to BlazorGitHubPagesDemo
+  
+    - name: Change base-tag in index.html
       run: sed -i 's/<base href="\/" \/>/<base href="\/D3ADWebsite\/" \/>/g' release/wwwroot/index.html
     
     - name: copy index.html to 404.html
@@ -31,6 +31,5 @@ jobs:
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@v4.4.1
       with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages
         FOLDER: release/wwwroot
+        BRANCH: gh-pages
